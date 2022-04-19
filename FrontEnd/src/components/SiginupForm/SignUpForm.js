@@ -193,6 +193,7 @@ const SignUpForm = () => {
   return (
     <>
       <form onSubmit={onSumbitHandler} className={classes["order-form"]}>
+        <h1 className={classes.header}>{isLogin ? "Login" : "Register"}</h1>
         {!isLogin ? (
           <FormGroup
             type="text"

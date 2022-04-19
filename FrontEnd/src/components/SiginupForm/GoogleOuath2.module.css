@@ -1,6 +1,17 @@
 .google-login {
   display: block;
-  background-color: var(--primary-color-dark) !important;
+  background-color: var(--sec-color-regular) !important;
   color: #fff !important;
   opacity: 1 !important;
+  border: none !important;
+  font-size: 2rem !important;
+  font-family: "BubblegumSans" !important;
+  margin: 0 1rem !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.6s ease-out !important;
+}
+.google-login:hover {
+  background-color: var(--sec-color-dark) !important;
+  color: #ccc !important;
 }
