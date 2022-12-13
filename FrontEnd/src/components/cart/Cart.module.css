@@ -1,147 +1,141 @@
-.checkout{
-    min-width: 60rem;
-    animation: appearFromLeft .3s ease-out;
+.checkout {
+  min-width: 60rem;
+  animation: appearFromLeft 0.3s ease-out;
 }
 
-.checkout-controls{
-    margin-top: 4rem;
-    display: flex;
-    flex-direction: row-reverse;
+.checkout-controls {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
-.checkout-controls button{
-    padding: 1rem 3rem;
-    font-size: 2rem;
-    border-radius: 2rem;
-    transition: all .3s ease-out;
-    width: 12rem;
+.checkout-controls button {
+  padding: 1rem 3rem;
+  font-size: 2rem;
+  border-radius: 2rem;
+  transition: all 0.3s ease-out;
+  width: 12rem;
 }
 
-.order{
-    margin-right: 1rem;
-    border: 2px solid var(--sec-color-dark);
-    color: var(--sec-color-dark);
+.order {
+  margin-right: 1rem;
+  border: 2px solid var(--sec-color-dark);
+  color: var(--sec-color-dark);
 }
 
-.cancel{
-    border: 2px solid var(--primary-color-dark);
-    color: #FFF;
-    background-color: var(--primary-color-dark);
+.cancel {
+  border: 2px solid var(--primary-color-dark);
+  color: #fff;
+  background-color: var(--primary-color-dark);
 }
 
-.checkout-controls .order:hover{
-    background-color: var(--sec-color-dark);
-    color: #FFF;
+.checkout-controls .order:hover {
+  background-color: var(--sec-color-dark);
+  color: #fff;
 }
 
-.disabled{
-   opacity: .6;;
-    border: none;
-    pointer-events: none;
+.disabled {
+  opacity: 0.6;
+  border: none;
+  pointer-events: none;
 }
-.price-pane{
-    margin: 2rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    font-family: 'The Simple Sweet Serif';
-    font-size: 6rem;
-
+.price-pane {
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-family: 'The Simple Sweet Serif';
+  font-size: 6rem;
 }
-.price-pane h4{
-    font-size: 6rem;
-}
-
-.price-pane p{
-    color: var(--primary-color-dark);
+.price-pane h4 {
+  font-size: 6rem;
 }
 
-
-.checkout h2, .order-section h2{
-    font-size: 10rem;
-    color: var(--sec-color-dark);
-    text-align: center;
+.price-pane p {
+  color: var(--primary-color-dark);
 }
 
-.no-item-txt{
-        font-size: 4rem;
-        font-weight: bold;
-        color: var(--primary-color-dark);
-        margin-top: 10rem;
-        text-align: center;
+.checkout h2,
+.order-section h2 {
+  font-size: 10rem;
+  color: var(--sec-color-dark);
+  text-align: center;
 }
 
-.cart-items{
-    min-height: 30rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-height: 40rem;
-    min-width: 50rem;
-    overflow-y: scroll;
+.no-item-txt {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--primary-color-dark);
+  margin-top: 10rem;
+  text-align: center;
+}
+
+.cart-items {
+  min-height: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 40rem;
+  min-width: 50rem;
+  overflow-y: scroll;
 }
 .cart-items::-webkit-scrollbar {
-    display: none;
-  }
+  display: none;
+}
 
+/* ORDER SECTION */
+.order-section {
+  min-width: 50rem;
+  min-height: 60rem;
+  display: flex;
+  flex-direction: column;
+  animation: appearFromRight 0.3s ease-out;
+}
 
-  /* ORDER SECTION */
-  .order-section{
-    min-width: 50rem;
-    min-height: 60rem;
-    display: flex;
-    flex-direction: column;
-    animation: appearFromRight .3s ease-out;
-  }
+.order-section input:last-child {
+  margin-bottom: 3rem;
+}
 
-  .order-section input:last-child{
-      margin-bottom: 3rem;
-  }
+.order-section form {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+}
 
+.order-section button {
+  padding: 1rem 3rem;
+  font-size: 2rem;
+  border-radius: 2rem;
+  transition: all 0.3s ease-out;
+  width: 12rem;
+}
 
-  .order-section form{
-      display: flex;
-      flex-direction: column;
-      flex: 1 0;
-  }
-
-  .order-section button{
-    padding: 1rem 3rem;
-    font-size: 2rem;
-    border-radius: 2rem;
-    transition: all .3s ease-out;
-    width: 12rem;
-  }
-
-   .form-action{
-      display: flex;
-      margin-top: auto;
-      flex-direction: row-reverse;
-  }
-
-
-
+.form-action {
+  display: flex;
+  margin-top: auto;
+  flex-direction: row-reverse;
+}
 
 @keyframes appearFromLeft {
-    0%{
-        opacity: 0;
-        transform: translateX(-20%);
-    }
+  0% {
+    opacity: 0;
+    transform: translateX(-20%);
+  }
 
-    100%{
-        opacity: 1;
-        transform: translateX(0);
-    }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes appearFromRight {
-    0%{
-        opacity: 0;
-        transform: translateX(20%);
-    }
+  0% {
+    opacity: 0;
+    transform: translateX(20%);
+  }
 
-    100%{
-        opacity: 1;
-        transform: translateX(0);
-    }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

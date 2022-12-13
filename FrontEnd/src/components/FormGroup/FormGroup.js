@@ -1,5 +1,5 @@
-import React from "react";
-import classes from "./FormGroup.module.css";
+import React from 'react'
+import classes from './FormGroup.module.css'
 
 const FormGroup = (props) => {
   const {
@@ -10,12 +10,12 @@ const FormGroup = (props) => {
     enteredValue,
     inputHasError,
     errMsg,
-  } = props;
+  } = props
 
   return (
     <div
-      className={`${classes["form-control"]} ${
-        inputHasError ? classes.invalid : ""
+      className={`${classes['form-control']} ${
+        inputHasError ? classes.invalid : ''
       }`}
     >
       <label htmlFor={name}>{name}</label>
@@ -29,7 +29,7 @@ const FormGroup = (props) => {
       />
       {inputHasError && <p>{errMsg}</p>}
     </div>
-  );
-};
+  )
+}
 
-export default FormGroup;
+export default FormGroup

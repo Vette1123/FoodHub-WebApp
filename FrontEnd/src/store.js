@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
-import UISlice from "./slices/UI-slice";
-import cartSlice from "./slices/Cart-slice";
-import loginSlice from "./slices/Login-State-slice";
-import authSlice from "./slices/Auth-slice";
+import { configureStore } from '@reduxjs/toolkit'
+import UISlice from './slices/UI-slice'
+import cartSlice from './slices/Cart-slice'
+import loginSlice from './slices/Login-State-slice'
+import authSlice from './slices/Auth-slice'
 
 const store = configureStore({
   reducer: {
@@ -11,6 +11,6 @@ const store = configureStore({
     login: loginSlice.reducer,
     auth: authSlice.reducer,
   },
-});
+})
 
-export default store;
+export default store

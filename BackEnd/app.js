@@ -14,8 +14,6 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 
-// http://localhost:8000/le-mont-saint-michel-gf7a3aa2b6_1920.jpg
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(corsOrigin);

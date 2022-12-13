@@ -1,41 +1,42 @@
-import React, { useState, forwardRef } from "react";
-import classes from "./Meal.module.css";
-import { useDispatch } from "react-redux";
-import { CartActions } from "../../slices/Cart-slice";
-import { UIActions } from "../../slices/UI-slice";
+import React, { useState, forwardRef } from 'react'
+import classes from './Meal.module.css'
+import { useDispatch } from 'react-redux'
+import { CartActions } from '../../slices/Cart-slice'
+import { UIActions } from '../../slices/UI-slice'
+import { BASE_URL } from '../../api'
 
 const Meal = forwardRef((props, ref) => {
-  const [amount, setAmount] = useState(0);
-  const { title, desc, id, price, photo } = props;
-  const dispatch = useDispatch();
+  const [amount, setAmount] = useState(0)
+  const { title, desc, id, price, photo } = props
+  const dispatch = useDispatch()
 
   const onIncHandler = () => {
-    setAmount(amount + 1);
-  };
+    setAmount(amount + 1)
+  }
 
   const onDecHandler = () => {
-    setAmount(amount - 1);
-  };
+    setAmount(amount - 1)
+  }
 
   const onAddHandler = () => {
-    const notificationId = Date.now();
-    dispatch(CartActions.addItem({ id, title, desc, amount, price, photo }));
+    const notificationId = Date.now()
+    dispatch(CartActions.addItem({ id, title, desc, amount, price, photo }))
     dispatch(
       UIActions.addNotification({
         msg: `${title} is added to cart.`,
         id: notificationId,
       })
-    );
+    )
     setTimeout(
       () => dispatch(UIActions.removeNotification({ id: notificationId })),
       3000
-    );
-  };
+    )
+  }
 
   return (
     <div className={classes.meal} ref={ref}>
-      <div className={classes["img-container"]}>
-        <img src={`http://localhost:8000/${photo}`} alt="meal" />
+      <div className={classes['img-container']}>
+        <img src={`${BASE_URL}/${photo}`} alt='meal' />
       </div>
       <div className={classes.textbox}>
         <h3>{title}</h3>
@@ -46,23 +47,23 @@ const Meal = forwardRef((props, ref) => {
       </div>
       <div className={classes.counter}>
         <input
-          className={!amount ? classes.reset : ""}
+          className={!amount ? classes.reset : ''}
           disabled
-          type="number"
+          type='number'
           value={amount}
         />
         <div className={classes.controls}>
           <button
             onClick={onDecHandler}
             disabled={!amount}
-            className={`${!amount ? classes.disabled : ""}`}
+            className={`${!amount ? classes.disabled : ''}`}
           >
             -
           </button>
           <button onClick={onIncHandler}>+</button>
         </div>
         <button
-          className={`${classes.orderbtn} ${!amount ? classes.disabled : ""}`}
+          className={`${classes.orderbtn} ${!amount ? classes.disabled : ''}`}
           onClick={onAddHandler}
           disabled={!amount}
         >
@@ -70,7 +71,7 @@ const Meal = forwardRef((props, ref) => {
         </button>
       </div>
     </div>
-  );
-});
+  )
+})
 
-export default Meal;
+export default Meal

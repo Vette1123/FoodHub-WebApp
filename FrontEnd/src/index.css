@@ -38,13 +38,13 @@ body {
   flex-direction: column;
 }
 
-body > #root{
+body > #root {
   flex: 1 0;
   display: flex;
   flex-direction: column;
 }
 
-#root > *{
+#root > * {
   flex: 1 0;
   display: flex;
   flex-direction: column;

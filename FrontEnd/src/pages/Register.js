@@ -1,8 +1,7 @@
-import React from "react";
-import classes from "./Register.module.css";
-import SignUpForm from "../components/SiginupForm/SignUpForm";
-import { useSelector } from "react-redux";
-import NavBar from "../UI/navbar/NavBar";
+import React from 'react'
+import classes from './Register.module.css'
+import SignUpForm from '../components/SiginupForm/SignUpForm'
+import NavBar from '../UI/navbar/NavBar'
 
 const Register = () => {
   return (
@@ -10,7 +9,7 @@ const Register = () => {
       <NavBar />
       <SignUpForm />
     </section>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

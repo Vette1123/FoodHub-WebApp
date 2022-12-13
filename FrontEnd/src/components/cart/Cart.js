@@ -1,50 +1,51 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Modal from "../../UI/modal/Modal";
-import classes from "./Cart.module.css";
-import { CartActions } from "../../slices/Cart-slice";
-import { UIActions } from "../../slices/UI-slice";
-import CartItem from "./CartItem";
-import useInput from "../../hooks/use-input";
-import { validateName } from "../SiginupForm/SignUpForm";
-import FormGroup from "../FormGroup/FormGroup";
-import axios from "axios";
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import Modal from '../../UI/modal/Modal'
+import classes from './Cart.module.css'
+import { UIActions } from '../../slices/UI-slice'
+import CartItem from './CartItem'
+import useInput from '../../hooks/use-input'
+import { validateName } from '../SiginupForm/SignUpForm'
+import FormGroup from '../FormGroup/FormGroup'
+import axios from 'axios'
+import { BASE_URL } from '../../api'
 
 const validatePhone = (val) => {
-  const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-  let phone = val.toString().trim();
-  if (phone === "") return { isValid: false, msg: "Phone is required" };
+  const phoneRegex =
+    /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+  let phone = val.toString().trim()
+  if (phone === '') return { isValid: false, msg: 'Phone is required' }
   if (!phone.match(phoneRegex))
-    return { isValid: false, msg: "Phone is not valid" };
-  return { isValid: true };
-};
+    return { isValid: false, msg: 'Phone is not valid' }
+  return { isValid: true }
+}
 
 const validateAddress = (val) => {
-  let phone = val.toString().trim();
-  if (phone === "") return { isValid: false, msg: "Address is required" };
-  return { isValid: true };
-};
+  let phone = val.toString().trim()
+  if (phone === '') return { isValid: false, msg: 'Address is required' }
+  return { isValid: true }
+}
 
 const Checkout = () => {
-  const cartItems = useSelector((state) => state.cart.cartItems);
-  const cartTotalPrice = useSelector((state) => state.cart.cartTotalPrice);
-  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.cartItems)
+  const cartTotalPrice = useSelector((state) => state.cart.cartTotalPrice)
+  const dispatch = useDispatch()
 
   const onCancelHandler = () => {
-    dispatch(UIActions.closeCart());
-  };
+    dispatch(UIActions.closeCart())
+  }
 
   const onCheckoutHandler = () => {
-    dispatch(UIActions.openOrder());
-  };
+    dispatch(UIActions.openOrder())
+  }
 
   return (
     <div className={classes.checkout}>
       <h2>Cart</h2>
       {!cartItems.length && (
-        <p className={classes["no-item-txt"]}>No items in cart</p>
+        <p className={classes['no-item-txt']}>No items in cart</p>
       )}
-      <div className={classes["cart-items"]}>
+      <div className={classes['cart-items']}>
         {cartItems.map((meal) => (
           <CartItem
             key={meal.id}
@@ -56,12 +57,12 @@ const Checkout = () => {
           />
         ))}
       </div>
-      <div className={classes["price-pane"]}>
+      <div className={classes['price-pane']}>
         <h4>Total Price:</h4>
         <p>{cartTotalPrice.toFixed(2)}LE</p>
       </div>
       {!!cartItems.length && (
-        <div className={classes["checkout-controls"]}>
+        <div className={classes['checkout-controls']}>
           <button className={classes.cancel} onClick={onCheckoutHandler}>
             Next
           </button>
@@ -71,13 +72,13 @@ const Checkout = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
 const OrderForm = () => {
-  const token = useSelector(state => state.auth.token);
-  const cartItems = useSelector(state =>  state.cart.cartItems);
-  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token)
+  const cartItems = useSelector((state) => state.cart.cartItems)
+  const dispatch = useDispatch()
   const {
     enteredValue: enteredName,
     hasError: nameInputHasError,
@@ -86,7 +87,7 @@ const OrderForm = () => {
     msg: nameErrMsg,
     isValid: isNameValid,
     resetHandler: resetNameHandler,
-  } = useInput(validateName);
+  } = useInput(validateName)
 
   const {
     enteredValue: enteredPhone,
@@ -96,7 +97,7 @@ const OrderForm = () => {
     msg: phoneErrMsg,
     isValid: isPhoneValid,
     resetHandler: resetpPhoneHandler,
-  } = useInput(validatePhone);
+  } = useInput(validatePhone)
 
   const {
     enteredValue: enteredAddress,
@@ -106,45 +107,52 @@ const OrderForm = () => {
     msg: addressErrMsg,
     isValid: isAddressValid,
     resetHandler: resetAddressHandler,
-  } = useInput(validateAddress);
+  } = useInput(validateAddress)
 
   const onBackHandler = () => {
-    dispatch(UIActions.closeOrder());
-  };
+    dispatch(UIActions.closeOrder())
+  }
 
   const onSumbitHandler = (e) => {
-    e.preventDefault();
-    console.log();
+    e.preventDefault()
+    console.log()
     const order = {
-      name:enteredName,
+      name: enteredName,
       phone: enteredPhone,
       address: enteredAddress,
-      meals: cartItems.map(item => {return {mealId: item.id, quantity: item.amount}})
+      meals: cartItems.map((item) => {
+        return { mealId: item.id, quantity: item.amount }
+      }),
     }
-    console.log(order);
-    axios.post('http://localhost:8000/api/v1/orders', order, {
-      headers: {
-        'authorization': `Bearer ${token}`,
-      }
-    })
-    .then(response=>{
-      console.log(response.data.message);
-      const notificatioId = Date.now();
-      dispatch(UIActions.addNotification({msg: response.data.message}));
-      dispatch(UIActions.closeCart());
-      setTimeout(() => dispatch(UIActions.removeNotification(notificatioId)),3000)
-    }).catch(err => {
-      console.log(err.message);
-    })
-  };
+    console.log(order)
+    axios
+      .post(`${BASE_URL}/api/v1/orders`, order, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data.message)
+        const notificatioId = Date.now()
+        dispatch(UIActions.addNotification({ msg: response.data.message }))
+        dispatch(UIActions.closeCart())
+        setTimeout(
+          () => dispatch(UIActions.removeNotification(notificatioId)),
+          3000
+        )
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
+  }
 
   return (
-    <div className={classes["order-section"]}>
+    <div className={classes['order-section']}>
       <h2>Order</h2>
-      <form className={classes["order-form"]}>
+      <form className={classes['order-form']}>
         <FormGroup
-          type="name"
-          name="name"
+          type='name'
+          name='name'
           valueChangedHandler={nameChangeHandler}
           inputBlurHandler={nameBlurHandler}
           enteredValue={enteredName}
@@ -153,8 +161,8 @@ const OrderForm = () => {
         />
 
         <FormGroup
-          type="Phone"
-          name="Phone"
+          type='Phone'
+          name='Phone'
           valueChangedHandler={phoneChangeHandler}
           inputBlurHandler={phoneBlurHandler}
           enteredValue={enteredPhone}
@@ -163,20 +171,20 @@ const OrderForm = () => {
         />
 
         <FormGroup
-          type="address"
-          name="address"
+          type='address'
+          name='address'
           valueChangedHandler={addressChangeHandler}
           inputBlurHandler={addressBlurHandler}
           enteredValue={enteredAddress}
           inputHasError={addressInputHasError}
           errMsg={addressErrMsg}
-          placeholder="Ex: City, Street, Home NO."
+          placeholder='Ex: City, Street, Home NO.'
         />
-        <div className={classes["form-action"]}>
+        <div className={classes['form-action']}>
           <button
             className={`${classes.cancel} ${
               isAddressValid && isPhoneValid && isNameValid
-                ? ""
+                ? ''
                 : classes.disabled
             }`}
             onClick={onSumbitHandler}
@@ -189,13 +197,13 @@ const OrderForm = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
 const Cart = () => {
-  const isOrderOpen = useSelector((state) => state.UI.isOrderOpen);
-  console.log(isOrderOpen);
-  return <Modal>{isOrderOpen ? <OrderForm /> : <Checkout />}</Modal>;
-};
+  const isOrderOpen = useSelector((state) => state.UI.isOrderOpen)
+  console.log(isOrderOpen)
+  return <Modal>{isOrderOpen ? <OrderForm /> : <Checkout />}</Modal>
+}
 
-export default Cart;
+export default Cart
